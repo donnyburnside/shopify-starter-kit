@@ -1,0 +1,45 @@
+{
+  "name": "shopify-starter-kit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently --kill-others \"gulp build && gulp watch\" \"cd theme && theme watch -e development\"",
+    "build": "cross-env NODE_ENV=development gulp build",
+    "deploy": "npm run build && cd theme && theme deploy -e development",
+    "build:prod": "cross-env NODE_ENV=production gulp build",
+    "deploy:prod": "npm run build:prod && cd theme && theme deploy -e production"
+  },
+  "browserslist": [
+    "extends @shopify/browserslist-config"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@shopify/browserslist-config": "^1.0.3",
+    "@shopify/theme-sections": "^2.0.5",
+    "autoprefixer": "^9.5.1",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "gulp": "^4.0.2",
+    "gulp-better-rollup": "^4.0.1",
+    "gulp-flatten": "^0.4.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "rollup": "^1.11.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donnyburnside/shopify-starter-kit.git"
+  },
+  "author": {
+    "name": "Donny Burnside",
+    "email": "donnyburnside1@gmail.com",
+    "url": "http://www.donnyburnside.com"
+  },
+  "license": "MIT"
+}

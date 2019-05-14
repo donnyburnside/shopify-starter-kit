@@ -1,0 +1,27 @@
+# This file contains a list of files and folders to be ignored when
+# committing to a git repository.
+
+# For more information on this .gitignore files, see GitHub's
+# documentation: https://help.github.com/articles/ignoring-files/
+
+# Dependencies #
+################
+/node_modules
+
+# Project #
+###########
+*.yml
+
+# Logs #
+########
+*.log
+
+# OS #
+######
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs #
+##################
+/.idea
+/.vs

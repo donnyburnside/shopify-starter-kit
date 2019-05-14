@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- capture seo_title -%}
+        {%- if template == 'search' and search.performed == true -%}
+            {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+        {%- else -%}
+            {{ page_title }}
+        {%- endif -%}
+        {%- if current_tags -%}
+            {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+        {%- endif -%}
+        {%- if current_page != 1 -%}
+            &ndash; {{ 'general.meta.page' | t: page: current_page }}
+        {%- endif -%}
+        {%- assign escaped_page_title = page_title | escape -%}
+        {%- unless escaped_page_title contains shop.name -%}
+            &ndash; {{ shop.name }}
+        {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <script type="text/javascript">
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+
+    <script type="text/javascript">
+        var theme = {
+            strings: {
+                addToCart: {{ 'products.product.add_to_cart' | t | json }},
+                soldOut: {{ 'products.product.sold_out' | t | json }},
+                unavailable: {{ 'products.product.unavailable' | t | json }}
+            },
+            moneyFormat: {{ shop.money_format | json }}
+        }
+        {% if template.directory == 'customers' %}
+            theme.allCountryOptionTags = {{ all_country_option_tags | json }};
+        {% endif %}
+    </script>
+
+    {{ 'theme-custom.scss' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    {%- if template.directory == 'customers' -%}
+        {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+        {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+    {%- endif -%}
+    {{ 'theme-custom.js' | asset_url | script_tag }}
+    {{ 'theme.js' | asset_url | script_tag }}
+
+    {% include 'social-meta-tags' %}
+    {% include 'microdata' %}
+
+    {{ content_for_header }}
+</head>
+<body class="template-{{ template | split: '.' | first }}">
+    <div class="site-container" id="site-container">
+        {% section 'header' %}
+        <main class="site-content" id="site-content" role="main">
+            {{ content_for_layout }}
+        </main>
+        {% section 'footer' %}
+    </div>
+</body>
+</html>

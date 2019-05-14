@@ -1,0 +1,13 @@
+development:
+  password: APP_API_KEY
+  theme_id: DEVELOPMENT_THEME_ID
+  store: DEVELOPMENT_STORE.myshopify.com
+  ignore_files:
+    
+
+production:
+  password: APP_API_KEY
+  theme_id: PRODUCTION_THEME_ID
+  store: PRODUCTION_STORE.myshopify.com
+  ignore_files:
+    
